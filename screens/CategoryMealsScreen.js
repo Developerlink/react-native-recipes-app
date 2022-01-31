@@ -1,10 +1,18 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
 
-export default function CategoryMealsScreen(props) {
+export default function CategoryMealsScreen({ navigation, route }) {
+  useEffect(() => {
+    navigation.setOptions({ title: route.params.title });
+  }, []);
+
   return (
     <View>
       <Text>CategoryMealsScreen</Text>
+      <Button
+        title="Go to Meal Details"
+        onPress={() => navigation.navigate("MealDetail")}
+      />
     </View>
   );
 }
