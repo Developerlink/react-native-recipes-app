@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 export default function FavoritesScreen(props) {
   return (
     <View>
-      <Text>Favorites yahoo</Text>
+      <Text>Favorites</Text>
     </View>
   );
 }

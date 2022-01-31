@@ -10,7 +10,7 @@ export default function CategoryMealsScreen(props) {
 }
 
 const styles = StyleSheet.create({
-    screen: {
-        flex: 1
-    }
+  screen: {
+    flex: 1,
+  },
 });
