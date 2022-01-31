@@ -1,5 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import * as Font from "expo"
+import AppLoading from "expo-app-loading";
+
+const fetchFontsAsync = () => {
+
+}
 
 export default function App() {
   return (
