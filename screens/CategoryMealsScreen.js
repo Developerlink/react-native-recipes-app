@@ -1,24 +1,17 @@
-import React, { useEffect } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import { CATEGORIES, MEALS } from "../data/dummyData";
+import MealList from "../components/MealList";
 
 export default function CategoryMealsScreen({ navigation, route }) {
+  const [displayedMeals, setDisplayedMeals] = useState([]);
   useEffect(() => {
-    navigation.setOptions({ title: route.params.title });
+    const catId = route.params.categoryId;
+    const category = CATEGORIES.find((category) => category.id === catId);
+    navigation.setOptions({ title: category.title });
+
+    const meals = MEALS.filter((meal) => meal.categoryIds.indexOf(catId) >= 0);
+    setDisplayedMeals(meals);
   }, []);
 
-  return (
-    <View>
-      <Text>CategoryMealsScreen</Text>
-      <Button
-        title="Go to Meal Details"
-        onPress={() => navigation.navigate("MealDetail")}
-      />
-    </View>
-  );
+  return <MealList navigation={navigation} meals={displayedMeals} />;
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-  },
-});

@@ -1,16 +1,36 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet } from "react-native";
+import { MEALS } from "../data/dummyData";
+import MealList from "../components/MealList";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import CustomHeaderButton from "../components/CustomHeaderButton";
 
-export default function FavoritesScreen(props) {
+export default function FavoritesScreen({ navigation, route }) {
+  const [displayedMeals, setDisplayedMeals] = useState([]);
+  useEffect(() => {
+    const catId = "c2";
+
+    const meals = MEALS.filter(
+      (meal) => meal.categoryIds.indexOf(catId) >= 0
+    );
+    setDisplayedMeals(meals);
+    
+    navigation.setOptions({      
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title="menu"
+            iconName="ios-menu"
+            onPress={() => console.log("Marked as favorite")}
+          />
+        </HeaderButtons>
+      ),
+    });
+  }, []);
+
   return (
-    <View>
-      <Text>Favorites</Text>
-    </View>
+      <MealList navigation={navigation} meals={displayedMeals}/>
   );
 }
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-  },
-});
+
