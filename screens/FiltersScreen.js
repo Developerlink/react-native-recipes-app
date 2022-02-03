@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/CustomHeaderButton";
 
-export default function FiltersScreen(props) {
+export default function FiltersScreen({navigation}) {
 
   useEffect(() => {
     navigation.setOptions({      

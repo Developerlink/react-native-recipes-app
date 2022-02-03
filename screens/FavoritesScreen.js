@@ -21,7 +21,7 @@ export default function FavoritesScreen({ navigation, route }) {
           <Item
             title="menu"
             iconName="ios-menu"
-            onPress={() => console.log("Marked as favorite")}
+            onPress={() => navigation.toggleDrawer()}
           />
         </HeaderButtons>
       ),

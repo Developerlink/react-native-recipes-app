@@ -21,7 +21,7 @@ export default function CategoriesScreen({ navigation }) {
           <Item
             title="menu"
             iconName="ios-menu"
-            onPress={() => console.log("Marked as favorite")}
+            onPress={() => navigation.toggleDrawer()}
           />
         </HeaderButtons>
       ),

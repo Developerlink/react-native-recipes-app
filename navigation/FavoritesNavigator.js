@@ -4,7 +4,7 @@ import colors from "../constants/colors";
 import MealDetailScreen from "../screens/MealDetailScreen";
 import { View } from "react-native";
 import FavoritesScreen from "../screens/FavoritesScreen";
-import stackOptions from "../constants/stackNavigatorOptions";
+import defaultHeaderOptions from "../constants/defaultHeaderOptions";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +17,7 @@ export default function FavoritesNavigator() {
           headerStyle: {
             backgroundColor: colors.favorite,
           },
-          ...stackOptions
+          ...defaultHeaderOptions
         }}
       >
         <Stack.Screen

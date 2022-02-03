@@ -5,7 +5,7 @@ import CategoriesScreen from "../screens/CategoriesScreen";
 import CategoryMealsScreen from "../screens/CategoryMealsScreen";
 import MealDetailScreen from "../screens/MealDetailScreen";
 import { View } from "react-native";
-import stackOptions from "../constants/stackNavigatorOptions";
+import defaultHeaderOptions from "../constants/defaultHeaderOptions";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,18 +13,18 @@ export default function MealsNavigator() {
   return (
     <View style={{ flex: 1 }} collapsable={false}>
       <Stack.Navigator
-        initialRouteName="categories"
+        initialRouteName="mealDetail"
         screenOptions={{
           headerStyle: {
             backgroundColor: colors.primary,
           },
-          ...stackOptions
+          ...defaultHeaderOptions
         }}
       >
         <Stack.Screen
           name="categories"
           component={CategoriesScreen}
-          options={{ title: "Meal Categories" }}
+          options={{ title: "Meal Categories"}}
         />
         <Stack.Screen name="categoryMeals" component={CategoryMealsScreen} />
         <Stack.Screen name="mealDetail" component={MealDetailScreen} />

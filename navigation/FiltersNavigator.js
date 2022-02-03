@@ -4,7 +4,7 @@ import colors from "../constants/colors";
 import MealDetailScreen from "../screens/MealDetailScreen";
 import { View } from "react-native";
 import FiltersScreen from "../screens/FiltersScreen";
-import stackOptions from "../constants/stackNavigatorOptions";
+import defaultHeaderOptions from "../constants/defaultHeaderOptions";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,12 +16,13 @@ export default function FiltersNavigator() {
           headerStyle: {
             backgroundColor: colors.secondary,
           },
-          ...stackOptions
+          ...defaultHeaderOptions
         }}
       >
         <Stack.Screen
           name="Filters"
           component={FiltersScreen}
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
     </View>

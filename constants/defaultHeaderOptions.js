@@ -1,7 +1,7 @@
 export default {
   headerTintColor: "#fff",
   headerTitleStyle: {
-    fontWeight: "bold",
+    fontFamily: "open-sans-bold",
   },
   headerTitleAlign: "center",
 };
