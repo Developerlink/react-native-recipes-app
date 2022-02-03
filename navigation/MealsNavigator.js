@@ -13,7 +13,7 @@ export default function MealsNavigator() {
   return (
     <View style={{ flex: 1 }} collapsable={false}>
       <Stack.Navigator
-        initialRouteName="mealDetail"
+        initialRouteName="categories"
         screenOptions={{
           headerStyle: {
             backgroundColor: colors.primary,

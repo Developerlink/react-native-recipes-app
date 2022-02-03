@@ -22,7 +22,7 @@ export default function FiltersNavigator() {
         <Stack.Screen
           name="Filters"
           component={FiltersScreen}
-          options={{headerShown: false}}
+          options={{title: "Filters"}}
         />
       </Stack.Navigator>
     </View>

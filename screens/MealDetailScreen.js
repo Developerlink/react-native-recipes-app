@@ -42,8 +42,8 @@ export default function MealDetailScreen({ navigation, route }) {
   const [selectedMeal, setSelectedMeal] = useState(emptyMeal);
 
   useEffect(() => {
-    // const mealId = route.params.mealId;
-    const mealId = "m1";
+    const mealId = route.params.mealId;
+    //const mealId = "m1";
     const meal = MEALS.find((meal) => meal.id === mealId);
     navigation.setOptions({
       title:
