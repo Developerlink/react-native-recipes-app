@@ -7,6 +7,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { enableScreens } from "react-native-screens";
 import TabMealsNavigator from "./navigation/TabMealsNavigator";
 import DrawerNavigator from "./navigation/DrawerNavigator";
+import { Provider } from "react-redux";
+import store from "./store/configureStore";
 
 enableScreens();
 
@@ -33,9 +35,11 @@ export default function App() {
   return (
     <View style={styles.screen}>
       <StatusBar backgroundColor="black" style="light" />
-      <NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
           <DrawerNavigator />
-      </NavigationContainer>
+        </NavigationContainer>
+      </Provider>
     </View>
   );
 }

@@ -4,18 +4,13 @@ import { MEALS } from "../data/dummyData";
 import MealList from "../components/MealList";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/CustomHeaderButton";
+import { useSelector, useDispatch } from "react-redux";
 
-export default function FavoritesScreen({ navigation, route }) {
-  const [displayedMeals, setDisplayedMeals] = useState([]);
+export default function FavoritesScreen({ navigation }) {
+  const { favoriteMeals } = useSelector((state) => state.meals);
+
   useEffect(() => {
-    const catId = "c2";
-
-    const meals = MEALS.filter(
-      (meal) => meal.categoryIds.indexOf(catId) >= 0
-    );
-    setDisplayedMeals(meals);
-    
-    navigation.setOptions({      
+    navigation.setOptions({
       headerLeft: () => (
         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
           <Item
@@ -28,9 +23,5 @@ export default function FavoritesScreen({ navigation, route }) {
     });
   }, []);
 
-  return (
-      <MealList navigation={navigation} meals={displayedMeals}/>
-  );
+  return <MealList navigation={navigation} meals={favoriteMeals} />;
 }
-
-

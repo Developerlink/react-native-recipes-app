@@ -8,11 +8,11 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import { MEALS } from "../data/dummyData";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import DefaultText from "../components/DefaultText";
 import { scale } from "../utils/scaling";
+import { useSelector, useDispatch } from "react-redux";
 
 const emptyMeal = {
   id: "",
@@ -40,11 +40,12 @@ const ListItem = (props) => {
 
 export default function MealDetailScreen({ navigation, route }) {
   const [selectedMeal, setSelectedMeal] = useState(emptyMeal);
+  const { meals } = useSelector(state => state.meals);
 
   useEffect(() => {
     const mealId = route.params.mealId;
     //const mealId = "m1";
-    const meal = MEALS.find((meal) => meal.id === mealId);
+    const meal = meals.find((meal) => meal.id === mealId);
     navigation.setOptions({
       title:
         Dimensions.get("window").width < 400
