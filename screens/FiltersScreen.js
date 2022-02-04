@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Switch } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useSelector, useDispatch } from "react-redux";
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import DefaultText from "../components/DefaultText";
 import colors from "../constants/colors";
+import { setFilters } from "../store/mealSlice";
 
 const FilterSwitch = (props) => {
   return (
     <View style={styles.filterContainer}>
       <Text style={styles.label}>{props.label}</Text>
       <Switch
+        name={props.name}
         trackColor={{ true: colors.secondaryLight, false: "lightgrey" }}
         thumbColor={colors.secondary}
         value={props.value}
@@ -19,11 +22,21 @@ const FilterSwitch = (props) => {
   );
 };
 
+const defaultFilters = {
+  isGlutenFree: false,
+  isLactoseFree: false,
+  isVegan: false,
+  isVegetarian: false,
+};
+
 export default function FiltersScreen({ navigation }) {
-  const [isGlutenFree, setIsGlutenFree] = useState(false);
-  const [isLactoseFree, setIsLactoseFree] = useState(false);
-  const [isVegan, setIsVegan] = useState(false);
-  const [isVegetarian, setIsVegetarian] = useState(false);
+  // const [isGlutenFree, setIsGlutenFree] = useState(false);
+  // const [isLactoseFree, setIsLactoseFree] = useState(false);
+  // const [isVegan, setIsVegan] = useState(false);
+  // const [isVegetarian, setIsVegetarian] = useState(false);
+  //const [appliedFilters, setAppliedFilters] = useState(defaultFilters);
+  const { filters } = useSelector((state) => state.meals);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     navigation.setOptions({
@@ -39,48 +52,70 @@ export default function FiltersScreen({ navigation }) {
     });
   }, []);
 
+  // useEffect(() => {
+  //   const saveFilters = () => {
+  //     const appliedFilters = {
+  //       isGlutenFree,
+  //       isLactoseFree,
+  //       isVegan,
+  //       isVegetarian,
+  //     };
+
+  //     dispatch(setFilters(appliedFilters));
+  //   };
+
+  //   navigation.setOptions({
+  //     headerRight: () => (
+  //       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+  //         <Item title="save" onPress={saveFilters} />
+  //       </HeaderButtons>
+  //     ),
+  //   });
+  // }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian, dispatch]);
+
+  const onValueChangeHandler = (event) => {
+    const { name, value } = event;
+    // const newFilters = {
+    //   ...appliedFilters,
+    //   [name]: value,
+    // }
+    // setAppliedFilters(newFilters);
+    dispatch(setFilters({ name, value }));
+  };
+
   useEffect(() => {
-    const saveFilters = () => {
-      const appliedFilters = {
-        isGlutenFree,
-        isLactoseFree,
-        isVegan,
-        isVegetarian,
-      };
-
-      console.log(appliedFilters);
-    };
-
-    navigation.setOptions({
-      headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-          <Item title="save" onPress={saveFilters} />
-        </HeaderButtons>
-      ),
-    });
-  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+    //console.log(appliedFilters);
+  }, [filters]);
 
   return (
     <View style={styles.screen}>
       <FilterSwitch
         label="Gluten-free"
-        value={isGlutenFree}
-        onValueChange={(newValue) => setIsGlutenFree(newValue)}
+        value={filters.isGlutenFree}
+        onValueChange={(value) =>
+          onValueChangeHandler({ value: value, name: "isGlutenFree" })
+        }
       />
       <FilterSwitch
         label="Lactose-free"
-        value={isLactoseFree}
-        onValueChange={(newValue) => setIsLactoseFree(newValue)}
+        value={filters.isLactoseFree}
+        onValueChange={(value) =>
+          onValueChangeHandler({ value: value, name: "isLactoseFree" })
+        }
       />
       <FilterSwitch
         label="Vegan"
-        value={isVegan}
-        onValueChange={(newValue) => setIsVegan(newValue)}
+        value={filters.isVegan}
+        onValueChange={(value) =>
+          onValueChangeHandler({ value: value, name: "isVegan" })
+        }
       />
       <FilterSwitch
         label="Vegetarian"
-        value={isVegetarian}
-        onValueChange={(newValue) => setIsVegetarian(newValue)}
+        value={filters.isVegetarian}
+        onValueChange={(value) =>
+          onValueChangeHandler({ value: value, name: "isVegetarian" })
+        }
       />
     </View>
   );

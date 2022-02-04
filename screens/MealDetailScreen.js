@@ -13,6 +13,7 @@ import CustomHeaderButton from "../components/CustomHeaderButton";
 import DefaultText from "../components/DefaultText";
 import { scale } from "../utils/scaling";
 import { useSelector, useDispatch } from "react-redux";
+import { toggleFavorite } from "../store/mealSlice";
 
 const emptyMeal = {
   id: "",
@@ -40,31 +41,36 @@ const ListItem = (props) => {
 
 export default function MealDetailScreen({ navigation, route }) {
   const [selectedMeal, setSelectedMeal] = useState(emptyMeal);
-  const { meals } = useSelector(state => state.meals);
+  const { meals, favoriteMeals } = useSelector((state) => state.meals);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const mealId = route.params.mealId;
     //const mealId = "m1";
     const meal = meals.find((meal) => meal.id === mealId);
+    const isFavorited = favoriteMeals.some((meal)=> meal.id === mealId);
+
     navigation.setOptions({
       title:
         Dimensions.get("window").width < 400
           ? meal.title.length > 16
-            ? meal.title.substr(0, 18) + "..."
+            ? meal.title.substr(0, 16) + "..."
             : meal.title
           : meal.title,
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
           <Item
             title="Favorite"
-            iconName="ios-star"
-            onPress={() => console.log("Marked as favorite")}
+            iconName={isFavorited ? "ios-star" : "ios-star-outline"}
+            onPress={() => {
+              dispatch(toggleFavorite({ mealId: mealId }));
+            }}
           />
         </HeaderButtons>
       ),
     });
     setSelectedMeal(meal);
-  }, []);
+  }, [dispatch, favoriteMeals]);
 
   return (
     <ScrollView>
@@ -80,7 +86,9 @@ export default function MealDetailScreen({ navigation, route }) {
       ))}
       <Text style={styles.title}>Steps</Text>
       {selectedMeal.steps.map((step, index) => (
-        <ListItem key={step}>{index+1}.   {step}</ListItem>
+        <ListItem key={step}>
+          {index + 1}. {step}
+        </ListItem>
       ))}
     </ScrollView>
   );
@@ -106,6 +114,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderColor: "#ccc",
     borderWidth: 1,
-    padding: 10
-  }
+    padding: 10,
+  },
 });

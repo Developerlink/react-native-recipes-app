@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { MEALS } from "../data/dummyData";
 import MealList from "../components/MealList";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -23,5 +23,28 @@ export default function FavoritesScreen({ navigation }) {
     });
   }, []);
 
+  if (favoriteMeals.length === 0 || !favoriteMeals) {
+    return (
+      <View style={styles.screen}>
+        <Text style={styles.message}>
+          No meals have been marked as favorite yet!
+        </Text>
+      </View>
+    );
+  }
+
   return <MealList navigation={navigation} meals={favoriteMeals} />;
 }
+
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 50
+  },
+  message: {
+    fontFamily: "open-sans-bold",
+    fontSize: 22
+  }
+});

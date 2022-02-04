@@ -9,7 +9,7 @@ export default class Meal {
     duration,
     ingedients,
     steps,
-    isGlutenfree,
+    isGlutenFree,
     isVegan,
     isVegetarian,
     isLactoseFree
@@ -23,7 +23,7 @@ export default class Meal {
     this.duration = duration;
     this.ingedients = ingedients;
     this.steps = steps;
-    this.isGlutenfree = isGlutenfree;
+    this.isGlutenFree = isGlutenFree;
     this.isVegan = isVegan;
     this.isVegetarian = isVegetarian;
     this.isLactoseFree = isLactoseFree;
