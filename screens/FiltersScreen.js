@@ -22,12 +22,12 @@ const FilterSwitch = (props) => {
   );
 };
 
-const defaultFilters = {
-  isGlutenFree: false,
-  isLactoseFree: false,
-  isVegan: false,
-  isVegetarian: false,
-};
+// const defaultFilters = {
+//   isGlutenFree: false,
+//   isLactoseFree: false,
+//   isVegan: false,
+//   isVegetarian: false,
+// };
 
 export default function FiltersScreen({ navigation }) {
   // const [isGlutenFree, setIsGlutenFree] = useState(false);

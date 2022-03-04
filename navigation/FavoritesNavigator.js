@@ -2,7 +2,6 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import colors from "../constants/colors";
 import MealDetailScreen from "../screens/MealDetailScreen";
-import { View } from "react-native";
 import FavoritesScreen from "../screens/FavoritesScreen";
 import defaultHeaderOptions from "../constants/defaultHeaderOptions";
 
